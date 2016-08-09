@@ -11,7 +11,7 @@ public class HashMapImpl implements HashMap{
 		if(key==null){
 			return;
 		}
-		int hashIndex=(key.hashCode()%bucketSize)%10;
+		int hashIndex=key.hashCode()%bucketSize;
 		if(bucketArray[hashIndex]==null){
 			bucketArray[hashIndex]=new EntryDetails(key,value,null);
 		}
@@ -38,7 +38,7 @@ public class HashMapImpl implements HashMap{
 		if(key==null){
 			return null;
 		}
-		int hashIndex=(key.hashCode()%bucketSize)%10;
+		int hashIndex=key.hashCode()%bucketSize;
 		EntryDetails iteratingNode=bucketArray[hashIndex];
 		while(iteratingNode!=null){
 			if(iteratingNode.getKey().equalsIgnoreCase(key)){
@@ -50,12 +50,15 @@ public class HashMapImpl implements HashMap{
 	}
  public static void main(String[] args){
 	 HashMapImpl hashMap=new HashMapImpl();
-	 for(int i=1;i<100000;i++){
+	 for(int i=1;i<=1000000;i++){
 		 String key=String.valueOf(i);
 		 hashMap.put(key,key);
 	 }
-	 String lastval=hashMap.get("99999");
+	 long startTime=System.currentTimeMillis();
+	 String lastval=hashMap.get("1000000");
+	 long endTime=System.currentTimeMillis();
 	 System.out.println(lastval);
+	 System.out.println(endTime-startTime);
 	 
  }
 }
